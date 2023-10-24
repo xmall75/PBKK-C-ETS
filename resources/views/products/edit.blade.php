@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 
                     <div class="form">
-                        <h1 class="text-xl font-bold">Add a product</h1>
+                        <h1 class="text-xl font-bold">Edit product</h1>
 
                         <form action="{{ route('products.update',$product->id) }}" enctype="multipart/form-data" method="POST">
                         @csrf
