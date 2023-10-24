@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -31,17 +40,19 @@
 	                    <td class="text-center">{{ $product->keterangan }}</td>
                         <td class="text-center">{{ $product->kecacatan }}</td>
                         <td class="text-center">{{ $product->jumlah }}</td>
-	                    <td class="text-center">            
-                            <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
-                            @can('product-edit')
-                            <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
-                            @endcan                
+	                    <td class="text-center">         
+                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
 
-                            @can('product-delete')
-                                {!! Form::open(['method' => 'DELETE','route' => ['products.destroy', $product->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                            @endcan            
+                                <a class="btn btn-info m-2" href="{{ route('products.show',$product->id) }}">Show</a>
+
+                                <a class="btn btn-primary m-2" href="{{ route('products.edit',$product->id) }}">Edit</a>
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger m-2">Delete</button>
+
+                            </form>    
 	                    </td>
 	                </tr>
 	                @endforeach
@@ -52,4 +63,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </x-app-layout>
+</html>
